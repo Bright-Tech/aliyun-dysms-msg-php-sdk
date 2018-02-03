@@ -19,12 +19,11 @@
     "require": {
         "php": ">=5.5.0",
         "illuminate/support": "~5.4",
-        "bright-tech/aliyun-core": "^1.0@alpha"
+        "bright-tech/aliyun-core": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
     },
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Bright\\Aliyun\\Sms\\": "src/"

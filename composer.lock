@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "960e48c7870386ed702849e7589d18fe",
+    "content-hash": "1b4e7d7ec18ac568c0a09537dc43e6c9",
     "packages": [
         {
             "name": "bright-tech/aliyun-core",
-            "version": "v1.0-alpha",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bright-Tech/aliyun-core.git",
@@ -1625,10 +1625,8 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "bright-tech/aliyun-core": 15
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
