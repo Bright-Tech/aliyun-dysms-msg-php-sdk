@@ -8,6 +8,7 @@
 
 namespace Bright\Aliyun\Sms;
 
+use Bright\Aliyun\Core\Config;
 use Bright\Aliyun\Core\DefaultAcsClient;
 use Bright\Aliyun\Core\Profile\DefaultProfile;
 use Bright\Aliyun\Sms\Request\V20170525\SendBatchSmsRequest;
@@ -45,6 +46,8 @@ class Sms
         $this->accessKeyId = $accessKeyId;
         $this->accessKeySecret = $accessKeySecret;
 
+        Config::load();
+
         //初始化acsClient,暂不支持region化
         $profile = DefaultAcsClient::getProfile($this->region, $accessKeyId, $accessKeySecret);
 
@@ -62,12 +65,18 @@ class Sms
      * @param string $signName 必填，设置签名名称，应严格按"签名名称"填写
      * @param string $templateCode 必填，设置模板CODE，
      * @param array $templateParams 可选，设置模板参数, 假如模板中存在变量需要替换则为必填项
-     * @param int $outId 可选，设置流水号
+     * @param string $outId 可选，设置流水号
      * @param string $upExtendCode 选填，上行短信扩展码（扩展码字段控制在7位或以下，无特殊需求用户请忽略此字段）
      * @return mixed
      */
-    public function send($phoneNumber, $signName, $templateCode, $templateParams = [], $outId = 0, $upExtendCode)
-    {
+    public function send(
+        string $phoneNumber,
+        string $signName,
+        string $templateCode,
+        array $templateParams = [],
+        string $outId = '',
+        string $upExtendCode = ''
+    ) {
         // 初始化SendSmsRequest实例用于设置发送短信的参数
         $request = new SendSmsRequest();
 
@@ -98,18 +107,16 @@ class Sms
     /**
      * 批量发送短信
      *
-     * @param array $phoneNumber 必填，设置短信接收号码 上限为100个手机号码
-     * @param string $signName 必填:短信签名-支持不同的号码发送不同的短信签名
+     * @param array $phoneNumbers 必填，设置短信接收号码 上限为100个手机号码
+     * @param array $signNames 必填:短信签名-支持不同的号码发送不同的短信签名
      * @param string $templateCode 必填，设置模板CODE，
-     * @param array $templateParam 可选，设置模板参数, 假如模板中存在变量需要替换则为必填项  支持不同的号码对应不同参数
-     * @param int $outId 可选，设置流水号
-     * @param string $upExtendCode 选填，上行短信扩展码（扩展码字段控制在7位或以下，无特殊需求用户请忽略此字段）
+     * @param array $templateParams 可选，设置模板参数, 假如模板中存在变量需要替换则为必填项  支持不同的号码对应不同参数
      * @return mixed
      */
     public function sendBatch(
         array $phoneNumbers,
         array $signNames,
-        $templateCode,
+        string $templateCode,
         array $templateParams = []
     ) {
         // 初始化SendSmsRequest实例用于设置发送短信的参数
