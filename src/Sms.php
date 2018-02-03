@@ -49,7 +49,7 @@ class Sms
         Config::load();
 
         //初始化acsClient,暂不支持region化
-        $profile = DefaultAcsClient::getProfile($this->region, $accessKeyId, $accessKeySecret);
+        $profile = DefaultProfile::getProfile($this->region, $accessKeyId, $accessKeySecret);
 
         // 增加服务结点
         DefaultProfile::addEndpoint($this->endPointName, $this->region, $this->product, $this->domain);
@@ -70,12 +70,12 @@ class Sms
      * @return mixed
      */
     public function send(
-        string $phoneNumber,
-        string $signName,
-        string $templateCode,
+        $phoneNumber,
+        $signName,
+        $templateCode,
         array $templateParams = [],
-        string $outId = '',
-        string $upExtendCode = ''
+        $outId = '',
+        $upExtendCode = ''
     ) {
         // 初始化SendSmsRequest实例用于设置发送短信的参数
         $request = new SendSmsRequest();
@@ -116,7 +116,7 @@ class Sms
     public function sendBatch(
         array $phoneNumbers,
         array $signNames,
-        string $templateCode,
+        $templateCode,
         array $templateParams = []
     ) {
         // 初始化SendSmsRequest实例用于设置发送短信的参数
